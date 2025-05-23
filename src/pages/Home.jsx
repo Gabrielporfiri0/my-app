@@ -6,6 +6,7 @@ import axios from 'axios';
 
 export const Home = () => {
   const [pokemons, setPokemons] = useState([]);
+    const [filteredPokemons, setFilteredPokemons] = useState('');
 
   useEffect(() => {
     getPokemons();
@@ -17,6 +18,16 @@ export const Home = () => {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
     }
 
+    const pokemonFilter = (name) => {
+        var filteredPokemons = [];
+        for(var i in pokemons){
+            if(pokemons[i].data.name.includes(name)){
+                filteredPokemons.push(pokemons[i]);
+            }
+        }
+        setPokemons(filteredPokemons);
+    };
+   
     try {
       const responses = await axios.all(endpoints.map((endpoint) => axios.get(endpoint)));
       setPokemons(responses);
@@ -27,7 +38,7 @@ export const Home = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar pokemonFilter={pokemonFilter}/>
       <Container maxWidth="false">
         <Grid container spacing={2}>
           {pokemons.map((pokemon, key) => (
