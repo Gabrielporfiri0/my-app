@@ -51,7 +51,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar({ pokemonFilter }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: 'black' }}>
+      <AppBar position="static" sx={{ backgroundColor: 'red' }}>
         <Toolbar>
           <Typography
             variant="h6"
@@ -61,14 +61,14 @@ export default function Navbar({ pokemonFilter }) {
           >
             Pokemon
           </Typography>
-          <Search >
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Pesquisando..."
               inputProps={{ 'aria-label': 'search' }}
-              onChange={(event) => pokemonFilter(event.target.value)}
+              onChange={(e) => pokemonFilter(e.target.value.toLowerCase())}
             />
           </Search>
         </Toolbar>
