@@ -4,13 +4,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-interface PokemonsCard {
+interface PokemonsCardProps {
   name: string;
   image: string;
   types: Array<{ type: { name: string } }>;
 }
 
-export default function PokemonCard({ name, image, types }: PokemonsCard) {
+const PokemonCard: React.FC<PokemonsCardProps> = ({ name, image, types }) => {
   const typeHandler = () => {
     if (types.length > 1) {
       return `${types[0].type.name} / ${types[1].type.name}`;
@@ -48,4 +48,6 @@ export default function PokemonCard({ name, image, types }: PokemonsCard) {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default PokemonCard;

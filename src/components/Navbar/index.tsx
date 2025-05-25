@@ -8,6 +8,10 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 
+interface NavbarProps {
+  pokemonFilter?: (value: string) => void;
+  hideSearch?: boolean;
+}
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -50,40 +54,42 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ pokemonFilter, hideSearch }) {
+const Navbar: React.FC<NavbarProps> = ({ pokemonFilter, hideSearch = false }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'red' }}>
         <Toolbar>
           <Typography
-              variant="h6"
-              noWrap
-              component={Link}
-              to="/"
-              sx={{
-                flexGrow: 1,
-                display: { xs: 'none', sm: 'block' },
-                color: 'inherit',
-                textDecoration: 'none',
-                cursor: 'pointer',
-              }}
-            >
-              Pokemon
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/"
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', sm: 'block' },
+              color: 'inherit',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Pokemon
           </Typography>
-          {hideSearch? null : 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Pesquisando..."
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={(e) => pokemonFilter(e.target.value.toLowerCase())}
-            />
-          </Search> }
-          
+          {!hideSearch && (
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Pesquisando..."
+                inputProps={{ 'aria-label': 'search' }}
+               onChange={(e) => pokemonFilter?.(e.target.value.toLowerCase())}
+              />
+            </Search>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
   );
-}
+};
+
+export default Navbar;
