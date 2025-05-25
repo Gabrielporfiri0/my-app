@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import PokemonCard from '../components/PokemonCard';
-import { Container, Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import axios from 'axios';
 
-export const Home = () => {
+export const Home = ({setPokemonData}) => {
   const [pokemons, setPokemons] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [allPokemons, setAllPokemons] = useState([]);
@@ -45,6 +45,7 @@ export const Home = () => {
       <Navbar pokemonFilter={ pokemonFilter }/>
       <Container maxWidth="false">
         <Grid container spacing={2}>
+          <Box onClick={ () => setPokemonData (pokemons.data) }/>
           {pokemons.map((pokemon, key) => (
             <Grid item xs={3} key={key}>
               <PokemonCard
