@@ -22,7 +22,7 @@ Certifique-se de ter o Node.js instalado (recomenda-se versão 18+).
 npm install
 
 3. Inicie o projeto
-npm run dev
+npm start
 
 4. Dependencias
 Certifique-se de que as seguintes bibliotecas estejam instaladas:
